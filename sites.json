@@ -1,0 +1,1188 @@
+[
+  {
+    "id": "gikaispiti",
+    "name": "GiKaiSpiti",
+    "adapter": "realstatus",
+    "base_url": "https://www.gikaispiti.gr",
+    "params": {
+      "filter_int_to": 1
+    },
+    "deal": "sale"
+  },
+  {
+    "id": "oikia",
+    "name": "Οικία Real Estate",
+    "adapter": "wpl",
+    "base_url": "https://oikiarealestate.gr",
+    "list_path": "properties/",
+    "params": {
+      "sf_select_listing": 9
+    },
+    "deal": "sale"
+  },
+  {
+    "id": "ioanninahome",
+    "name": "Ioannina Home",
+    "adapter": "osproperty",
+    "base_url": "https://www.ioanninahome.gr",
+    "city": "Ιωάννινα",
+    "list_paths": [
+      {
+        "path": "/akinita-new/poliseis-akiniton-ioannina",
+        "deal": "sale"
+      }
+    ]
+  },
+  {
+    "id": "ioanninacasa",
+    "name": "Ioannina Casa",
+    "adapter": "houzez",
+    "base_url": "https://ioanninacasa.gr"
+  },
+  {
+    "id": "polisestate",
+    "name": "Polis Estate",
+    "adapter": "eagents",
+    "base_url": "https://www.polisestate.gr",
+    "params": {
+      "aim": 1
+    },
+    "deal": "sale"
+  },
+  {
+    "id": "greekestate",
+    "name": "GreekEstate.eu",
+    "adapter": "eagents",
+    "base_url": "https://greekestate.eu",
+    "params": {
+      "aim": 1
+    },
+    "deal": "sale"
+  },
+  {
+    "id": "elite",
+    "name": "Elite Real Estate",
+    "adapter": "wapp",
+    "base_url": "https://www.elite-realestate.gr"
+  },
+  {
+    "id": "remax-premier",
+    "name": "RE/MAX Premier",
+    "adapter": "realstatus_v2",
+    "base_url": "https://38400.gr"
+  },
+  {
+    "id": "vrespiti",
+    "name": "VreSpiti",
+    "adapter": "vrespiti",
+    "base_url": "https://www.vrespiti.gr",
+    "deal": "sale"
+  },
+  {
+    "id": "gethouse",
+    "name": "Get House",
+    "adapter": "gethouse",
+    "base_url": "https://www.gethouse.gr",
+    "list_path": "properties/sales",
+    "deal": "sale"
+  },
+  {
+    "id": "house4you",
+    "name": "House4You",
+    "adapter": "osproperty",
+    "base_url": "https://house4you.gr",
+    "city": "Ιωάννινα",
+    "list_paths": [
+      {
+        "path": "/endiapheromai-gia/akineta-pros-polese",
+        "deal": "sale"
+      }
+    ]
+  },
+  {
+    "id": "skourashome",
+    "name": "Skouras Home",
+    "adapter": "eagents",
+    "base_url": "https://www.skourashome.gr",
+    "params": {
+      "aim": 1
+    },
+    "deal": "sale"
+  },
+  {
+    "id": "gartzonikas",
+    "name": "Gartzonikas Home",
+    "adapter": "houzez",
+    "base_url": "https://www.gartzonikashome.gr"
+  },
+  {
+    "id": "georgiou",
+    "name": "Γεωργίου Μεσιτικό",
+    "adapter": "houzez",
+    "base_url": "https://mesitikogeorgiou.gr"
+  },
+  {
+    "id": "domus",
+    "name": "Domus Estate",
+    "adapter": "estateplus",
+    "base_url": "https://domus-estate.gr",
+    "deal": "sale"
+  },
+  {
+    "id": "tsimogiannis",
+    "name": "Τσιμογιάννης Δυναμική",
+    "adapter": "estateplus",
+    "base_url": "https://foititikaspitia.eu",
+    "deal": "sale"
+  },
+  {
+    "id": "housecity",
+    "name": "HouseCity",
+    "adapter": "myhome",
+    "base_url": "https://housecity.gr"
+  },
+  {
+    "id": "realhouses",
+    "name": "RealHouses",
+    "adapter": "orbit",
+    "base_url": "https://realhouses.gr"
+  },
+  {
+    "id": "thess-abitazione",
+    "name": "Abitazione Real Estate",
+    "adapter": "realstatus_v2",
+    "base_url": "https://www.abitazione.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-ademisrealestate",
+    "name": "Ademis Real Estate",
+    "adapter": "realstatus_v2",
+    "base_url": "https://www.ademisrealestate.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-alfaplusrealestate",
+    "name": "Alfa Plus Real Estate",
+    "adapter": "eagents",
+    "base_url": "https://www.alfaplusrealestate.gr",
+    "region": "Θεσσαλονίκη",
+    "params": {
+      "aim": 1
+    },
+    "lang": "el",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-artiplan",
+    "name": "ArtiPlan CP & RES",
+    "adapter": "realstatus_v2",
+    "base_url": "https://www.artiplan.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-barron",
+    "name": "Barron Property Project",
+    "adapter": "estateplus",
+    "base_url": "https://barron.gr",
+    "region": "Θεσσαλονίκη",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-boxmesitiko",
+    "name": "Box Real Estate",
+    "adapter": "estateplus",
+    "base_url": "https://boxmesitiko.gr",
+    "region": "Θεσσαλονίκη",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-doragroup",
+    "name": "Dora Group Real Estate",
+    "adapter": "estateplus",
+    "base_url": "https://doragroup.gr",
+    "region": "Θεσσαλονίκη",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-gougleri",
+    "name": "Γκουγκλέρη",
+    "adapter": "realstatus_v2",
+    "base_url": "https://gougleri.eu",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-gproperty",
+    "name": "G Property",
+    "adapter": "houzez",
+    "base_url": "https://gproperty.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-happyhousepro",
+    "name": "Happy House Property",
+    "adapter": "estateplus",
+    "base_url": "https://happyhousepro.gr",
+    "region": "Θεσσαλονίκη",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-houseland-estate",
+    "name": "House Land",
+    "adapter": "realstatus_v2",
+    "base_url": "https://www.houseland-estate.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-ikima",
+    "name": "IKIMA Real Estate",
+    "adapter": "eagents",
+    "base_url": "https://www.ikima.gr",
+    "region": "Θεσσαλονίκη",
+    "params": {
+      "aim": 1
+    },
+    "lang": "el",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-oikomesitikh",
+    "name": "Kamakas Oikomesitikh",
+    "adapter": "estateplus",
+    "base_url": "https://oikomesitikh.gr",
+    "region": "Θεσσαλονίκη",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-lamprakirealestate",
+    "name": "LAMPRAKI REAL ESTATE",
+    "adapter": "realstatus_v2",
+    "base_url": "https://lamprakirealestate.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-mesitikodimou",
+    "name": "Μεσιτικό Δήμου",
+    "adapter": "realstatus_v2",
+    "base_url": "https://www.mesitikodimou.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-morfinos-estate",
+    "name": "Morfinos Estate",
+    "adapter": "estateplus",
+    "base_url": "https://morfinos-estate.gr",
+    "region": "Θεσσαλονίκη",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-mykatoikia4u",
+    "name": "Mykatoikia4u",
+    "adapter": "realstatus_v2",
+    "base_url": "https://www.mykatoikia4u.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-oikein",
+    "name": "Oikein",
+    "adapter": "realstatus_v2",
+    "base_url": "https://www.oikein.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-oikia-thess",
+    "name": "Οικία Θεσσαλονίκη",
+    "adapter": "realstatus_v2",
+    "base_url": "https://www.oikia-thess.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-papafi",
+    "name": "Passas Real Estate",
+    "adapter": "estateplus",
+    "base_url": "https://papafi.gr",
+    "region": "Θεσσαλονίκη",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-propertyvision",
+    "name": "Property Vision",
+    "adapter": "estateplus",
+    "base_url": "https://propertyvision.gr",
+    "region": "Θεσσαλονίκη",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-realpraxis",
+    "name": "Real Praxis",
+    "adapter": "realstatus_v2",
+    "base_url": "https://realpraxis.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-sevenrealestate",
+    "name": "Seven Real Estate",
+    "adapter": "estateplus",
+    "base_url": "https://sevenrealestate.gr",
+    "region": "Θεσσαλονίκη",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-spiti365",
+    "name": "spiti365.gr",
+    "adapter": "realstatus_v2",
+    "base_url": "https://www.spiti365.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-starhomerealestate",
+    "name": "STAR HOME REAL ESTATE",
+    "adapter": "estateplus",
+    "base_url": "https://starhomerealestate.gr",
+    "region": "Θεσσαλονίκη",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-stegiependisi",
+    "name": "Στέγη Επένδυση",
+    "adapter": "estateplus",
+    "base_url": "https://stegiependisi.gr",
+    "region": "Θεσσαλονίκη",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-thebrokers",
+    "name": "The Brokers",
+    "adapter": "estateplus",
+    "base_url": "https://thebrokers.gr",
+    "region": "Θεσσαλονίκη",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-tzemisproperties",
+    "name": "Tzemis Real Estate",
+    "adapter": "estateplus",
+    "base_url": "https://tzemisproperties.gr",
+    "region": "Θεσσαλονίκη",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-vagionakirealestate",
+    "name": "VAGIONAKI REAL ESTATE",
+    "adapter": "estateplus",
+    "base_url": "https://vagionakirealestate.gr",
+    "region": "Θεσσαλονίκη",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-plrealestate",
+    "name": "ACB REAL ESTATE (acb.gr now redirects to plrealestate.gr / PL Real Estate)",
+    "adapter": "realstatus_v2",
+    "base_url": "https://plrealestate.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-alphahome",
+    "name": "Alpha Home",
+    "adapter": "estateplus",
+    "base_url": "https://www.alphahome.gr",
+    "region": "Θεσσαλονίκη",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-anastasiouproperties",
+    "name": "ANASTASIOU PROPERTIES",
+    "adapter": "houzez",
+    "base_url": "https://anastasiouproperties.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-avenuerealestate",
+    "name": "AVENUE REAL ESTATE",
+    "adapter": "estateplus",
+    "base_url": "https://avenuerealestate.gr",
+    "region": "Θεσσαλονίκη",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-alemarestate",
+    "name": "Alemar Estate (Elin Group)",
+    "adapter": "realstatus_v2",
+    "base_url": "https://www.alemarestate.com",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-habitatrealestate",
+    "name": "HABITAT REAL ESTATE",
+    "adapter": "estateplus",
+    "base_url": "https://habitatrealestate.gr",
+    "region": "Θεσσαλονίκη",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-home365gr",
+    "name": "Home 365gr",
+    "adapter": "eagents",
+    "base_url": "https://www.home365gr.gr",
+    "region": "Θεσσαλονίκη",
+    "params": {
+      "aim": 1
+    },
+    "lang": "el",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-home-life",
+    "name": "HOME LIFE REAL ESTATE",
+    "adapter": "realstatus_v2",
+    "base_url": "https://www.home-life.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-istosproperties",
+    "name": "Istos Properties",
+    "adapter": "eagents",
+    "base_url": "https://www.istosproperties.com",
+    "region": "Θεσσαλονίκη",
+    "params": {
+      "aim": 1
+    },
+    "lang": "el",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-karoutasproperties",
+    "name": "KAROUTAS PROPERTIES",
+    "adapter": "estateplus",
+    "base_url": "https://karoutasproperties.gr",
+    "region": "Θεσσαλονίκη",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-maddrealestate",
+    "name": "MADD Real Estate",
+    "adapter": "realstatus_v2",
+    "base_url": "https://www.maddrealestate.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-oikies",
+    "name": "Oikies Real Estate",
+    "adapter": "eagents",
+    "base_url": "https://www.oikies.net",
+    "region": "Θεσσαλονίκη",
+    "params": {
+      "aim": 1
+    },
+    "lang": "en",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-oikodromio",
+    "name": "Oikodromio Properties",
+    "adapter": "eagents",
+    "base_url": "https://www.oikodromio.com",
+    "region": "Θεσσαλονίκη",
+    "params": {
+      "aim": 1
+    },
+    "lang": "el",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-onasishome",
+    "name": "ONASIS HOME",
+    "adapter": "realstatus_v2",
+    "base_url": "https://www.onasishome.com",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-pasalidis-realestate",
+    "name": "Πασαλίδης Real Estate",
+    "adapter": "realstatus_v2",
+    "base_url": "https://www.pasalidis-realestate.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-remax-welcome",
+    "name": "RE/MAX WELCOME",
+    "adapter": "realstatus_v2",
+    "base_url": "https://remax-welcome.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-sirunproperty",
+    "name": "Sirun Property",
+    "adapter": "houzez",
+    "base_url": "https://sirunproperty.com",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-specialagentsestate",
+    "name": "Special Agents Estate",
+    "adapter": "estateplus",
+    "base_url": "https://specialagentsestate.gr",
+    "region": "Θεσσαλονίκη",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-stayhomerealestate",
+    "name": "STAY HOME REAL ESTATE",
+    "adapter": "estateplus",
+    "base_url": "https://stayhomerealestate.gr",
+    "region": "Θεσσαλονίκη",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-streetrealestate",
+    "name": "Street Real Estate",
+    "adapter": "eagents",
+    "base_url": "https://www.streetrealestate.gr",
+    "region": "Θεσσαλονίκη",
+    "params": {
+      "aim": 1
+    },
+    "lang": "el",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-tailor-madeproperty",
+    "name": "TM Tailor-Made Real Estate Services",
+    "adapter": "realstatus_v2",
+    "base_url": "https://www.tailor-madeproperty.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-themidarealestate",
+    "name": "THEMIDA REAL ESTATE",
+    "adapter": "realstatus_v2",
+    "base_url": "https://themidarealestate.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-celestproperties",
+    "name": "VERO REAL ESTATE (site now redirects to celestproperties.gr)",
+    "adapter": "estateplus",
+    "base_url": "https://celestproperties.gr",
+    "region": "Θεσσαλονίκη",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-villaingr",
+    "name": "Villa in GR",
+    "adapter": "realstatus_v2",
+    "base_url": "https://villaingr.com",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-visionhome",
+    "name": "Vision Home",
+    "adapter": "estateplus",
+    "base_url": "https://visionhome.gr",
+    "region": "Θεσσαλονίκη",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-agarealestate",
+    "name": "Aga Real Estate",
+    "adapter": "realstatus_v2",
+    "base_url": "https://www.agarealestate.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-veltiston",
+    "name": "ΒΕΛΤΙΣΤΟΝ",
+    "adapter": "realstatus_v2",
+    "base_url": "https://veltiston.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-lithosrealestate",
+    "name": "Lithos Real Estate",
+    "adapter": "eagents",
+    "base_url": "https://www.lithosrealestate.gr",
+    "region": "Θεσσαλονίκη",
+    "params": {
+      "aim": 1
+    },
+    "lang": "el",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-magdalinos",
+    "name": "ΜΑΓΔΑΛΗΝΟΣ REAL ESTATE",
+    "adapter": "realstatus_v2",
+    "base_url": "https://www.magdalinos.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-omikronestate",
+    "name": "Omikron Διαχείριση Ακινήτων",
+    "adapter": "realstatus_v2",
+    "base_url": "https://www.omikronestate.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-pazartzis",
+    "name": "Pazartzis",
+    "adapter": "realstatus_v2",
+    "base_url": "https://pazartzis.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-remax-axis",
+    "name": "RE/MAX Axis",
+    "adapter": "realstatus_v2",
+    "base_url": "https://www.remaxaxis.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-remax-inspirehouse",
+    "name": "RE/MAX Inspire House",
+    "adapter": "realstatus_v2",
+    "base_url": "https://www.remaxinspirehouse.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-remax-invest",
+    "name": "RE/MAX Invest",
+    "adapter": "eagents",
+    "base_url": "https://www.remax-invest.gr",
+    "region": "Θεσσαλονίκη",
+    "params": {
+      "aim": 1
+    },
+    "lang": "el",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-kwnorth",
+    "name": "KW North (Keller Williams)",
+    "adapter": "eagents",
+    "base_url": "https://www.kwnorth.gr",
+    "region": "Θεσσαλονίκη",
+    "params": {
+      "aim": 1
+    },
+    "lang": "el",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-diamanti",
+    "name": "Διαμάντι Μεσιτικό",
+    "adapter": "realstatus_v2",
+    "base_url": "https://diamanti.realestate",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-thessmesiti",
+    "name": "ThessMesiti Real Estate",
+    "adapter": "eagents",
+    "base_url": "https://www.thessmesiti.gr",
+    "region": "Θεσσαλονίκη",
+    "params": {
+      "aim": 1
+    },
+    "lang": "el",
+    "deal": "sale"
+  },
+  {
+    "id": "thess-mesitiki",
+    "name": "MESITIKI.NET",
+    "adapter": "abroker",
+    "base_url": "https://mesitiki.net",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-monopoly031",
+    "name": "MONOPOLY 031",
+    "adapter": "abroker",
+    "base_url": "https://monopoly.com.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-angeloglou",
+    "name": "Μεσιτικό γραφείο Αγγέλογλου",
+    "adapter": "abroker",
+    "base_url": "https://katikia.com.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-thermaikos",
+    "name": "THERMAIKOS REAL ESTATE",
+    "adapter": "abroker",
+    "base_url": "https://thermaikosrealest.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-akinito",
+    "name": "ΑΚΙ-ΝΗΤΟ REAL ESTATE",
+    "adapter": "abroker",
+    "base_url": "https://aki-nito.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-monopoly40",
+    "name": "Monopoly Home",
+    "adapter": "monopoly40",
+    "base_url": "https://monopoly40.com",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-2310",
+    "name": "2310 Real Estate",
+    "adapter": "realestate2310",
+    "base_url": "https://2310realestate.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-masterhouse",
+    "name": "Master House",
+    "adapter": "estateplus",
+    "base_url": "https://master-house.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-timeless",
+    "name": "Timeless Realty",
+    "adapter": "estateplus",
+    "base_url": "https://timeless-realty.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-eliteps",
+    "name": "Elite Properties",
+    "adapter": "abroker",
+    "base_url": "https://eliteps.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-liaggas",
+    "name": "Liaggas Real Estate",
+    "adapter": "spitogatos_sites",
+    "base_url": "https://www.liaggas-realestate.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-newhomes",
+    "name": "Newhomes",
+    "adapter": "spitogatos_sites",
+    "base_url": "https://newhomesrealestate.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-poliestate",
+    "name": "POLI ESTATE",
+    "adapter": "spitogatos_sites",
+    "base_url": "https://poliestate.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-viestate",
+    "name": "Vi.Estate",
+    "adapter": "spitogatos_sites",
+    "base_url": "https://www.viestate.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-iordanou",
+    "name": "ΙΟΡΔΑΝΟΥ ΜΕΣΙΤΙΚΟ",
+    "adapter": "spitogatos_sites",
+    "base_url": "https://www.natiordanou.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-arcus",
+    "name": "Arcus Real Estate",
+    "adapter": "arcus",
+    "base_url": "https://arcusrealestate.gr",
+    "regions": [
+      "Θεσσαλονίκη"
+    ],
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-skyline",
+    "name": "Skyline Property",
+    "adapter": "skyline",
+    "base_url": "https://skylineproperty.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-arthome",
+    "name": "ART.HOME",
+    "adapter": "arthome",
+    "base_url": "https://arthome-realestate.gr",
+    "locations": {
+      "nomos_108": "Θεσσαλονίκη",
+      "nomos_109": null,
+      "nomos_110": null
+    },
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-ktimatoemporiki",
+    "name": "Ktimatoemporiki Real Estate",
+    "adapter": "ktimatoemporiki",
+    "base_url": "https://ktimatoemporiki.gr",
+    "region_path": "/thessaloniki-prefecture",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-grekodom",
+    "name": "Grekodom Development",
+    "adapter": "grekodom",
+    "base_url": "https://www.grekodom.com",
+    "regions": [
+      4,
+      22
+    ],
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-goldenhome",
+    "name": "Golden Home Θεσσαλονίκη",
+    "adapter": "goldenhome",
+    "base_url": "https://goldenhome.gr",
+    "area_params": "/perioxi-thessaloniki-center",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-newdeal",
+    "name": "NEW DEAL GROUP - POWER DEAL REAL ESTATE",
+    "adapter": "newdeal",
+    "base_url": "https://newdeal.gr",
+    "locations": [
+      108,
+      109,
+      110
+    ],
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-ktimatoependitiki",
+    "name": "REALTY – Κτηματοεπενδυτική",
+    "adapter": "ktimatoependitiki",
+    "base_url": "https://www.ktimatoependitiki.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-remaxgold",
+    "name": "RE/MAX Gold",
+    "adapter": "remaxgold",
+    "base_url": "https://remax-gold.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-elgreko",
+    "name": "El Greko Real Estate",
+    "adapter": "elgreko",
+    "base_url": "https://www.elgrekorealestate.com",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-melathron",
+    "name": "Melathron",
+    "adapter": "estatesvc",
+    "base_url": "https://www.melathron.estate",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-matrik",
+    "name": "Matrik Real Estate",
+    "adapter": "matrik",
+    "base_url": "https://www.matrik.gr",
+    "prefecture": "108,109,110",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-renovahouse",
+    "name": "Renovahouse",
+    "adapter": "renovahouse",
+    "base_url": "https://renovahouse.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-stourou",
+    "name": "Olga Stourou Real Estate",
+    "adapter": "stourou",
+    "base_url": "https://stourou.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-karanikolas",
+    "name": "Karanikolas Real Estate",
+    "adapter": "karanikolas",
+    "base_url": "https://www.karanikolas-estate.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-pointers",
+    "name": "Pointers Property Services",
+    "adapter": "pointers",
+    "base_url": "https://www.pointers.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-elxis",
+    "name": "Elxis (Thessaloniki)",
+    "adapter": "elxis",
+    "base_url": "https://elxis.com",
+    "area_slug": "thessaloniki-regional-unit",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-engelvoelkers",
+    "name": "Engel & Völkers Thessaloniki",
+    "adapter": "engelvoelkers",
+    "base_url": "https://www.engelvoelkers.com",
+    "shop_id": "ebf4a63f",
+    "shop_name": "Thessaloniki",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-thessrealestate",
+    "name": "Thess Real Estate",
+    "adapter": "realhomes",
+    "base_url": "https://thessrealestate.gr",
+    "list_path": "katastasi-akinitou/polisi/",
+    "city": "Θεσσαλονίκη",
+    "deal": "sale",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-ellasestate",
+    "name": "Ellas Estate",
+    "adapter": "realhomes",
+    "base_url": "https://www.ellasestate.com",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-thessaloniki-realestate",
+    "name": "Thessaloniki Real Estate",
+    "adapter": "realhomes",
+    "base_url": "https://www.thessaloniki-realestate.gr",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-mesit",
+    "name": "MESIT",
+    "adapter": "wpresidence",
+    "base_url": "https://mesit.gr",
+    "list_path": "property_action_category/sales/",
+    "deal": "sale",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-tzemis",
+    "name": "Tzemis Real Estate",
+    "adapter": "wpresidence",
+    "base_url": "https://www.tzemis.gr",
+    "list_path": "action/sales/",
+    "deal": "sale",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-gaiarealty",
+    "name": "Gaia Realty",
+    "adapter": "estatik",
+    "base_url": "https://gaiarealty.gr",
+    "list_path": "el/akinita/pros-polisi/",
+    "deal": "sale",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-agn",
+    "name": "AGN Real Estate",
+    "adapter": "findeo",
+    "base_url": "https://www.agnrealestate.gr",
+    "list_path": "properties/?_offer_type=sale",
+    "deal": "sale",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-civilhome",
+    "name": "Civil Home",
+    "adapter": "wpcpt",
+    "base_url": "https://civilhome.gr",
+    "post_type": "akinito",
+    "deal_taxonomy": "typos-aggelias",
+    "type_taxonomy": "ypokatigoria-akinitou",
+    "place_taxonomy": "perioxi-akinitou",
+    "bedrooms_taxonomy": "ipnodomatia",
+    "city": "Θεσσαλονίκη",
+    "deal": "sale",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-gmas",
+    "name": "G-MAS Real Estate",
+    "adapter": "wpcpt",
+    "base_url": "https://www.g-mas.gr",
+    "post_type": "property",
+    "deal_taxonomy": "transaction_type",
+    "type_taxonomy": "property_type",
+    "place_taxonomy": "property_location",
+    "grid_path": "el/akinita/?jsf=jet-engine:properties_archive&pagenum={page}",
+    "deal": "sale",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-kosmopolis",
+    "name": "Kosmopolis House",
+    "adapter": "wpcpt",
+    "base_url": "https://kosmopolishouse.gr",
+    "post_type": "house",
+    "deal_taxonomy": "kathgories-akinitwn",
+    "city": "Θεσσαλονίκη",
+    "deal": "sale",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-estatecenter",
+    "name": "City Center Real Estate (Estate Center)",
+    "adapter": "realstatus_v3",
+    "base_url": "https://www.estatecenter.gr",
+    "city": "Θεσσαλονίκη",
+    "deal": "sale",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-hellenichome",
+    "name": "Hellenic Home",
+    "adapter": "realstatus_v3",
+    "base_url": "https://www.hellenic-home.gr",
+    "city": "Θεσσαλονίκη",
+    "deal": "sale",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-houseforyou",
+    "name": "House For You",
+    "adapter": "realstatus_v3",
+    "base_url": "https://www.houseforyou.com.gr",
+    "city": "Θεσσαλονίκη",
+    "deal": "sale",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-liberty",
+    "name": "Liberty Real Estate",
+    "adapter": "realstatus_seo",
+    "base_url": "https://liberty.com.gr",
+    "list_paths": [
+      "listings/for/1"
+    ],
+    "page_format": "/page/{page}",
+    "deal": "sale",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-olympus",
+    "name": "Olympus Real Estate",
+    "adapter": "realstatus_v3",
+    "base_url": "https://www.olympusrealestate.gr",
+    "city": "Θεσσαλονίκη",
+    "deal": "sale",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-pisti",
+    "name": "PISTI Real Estate",
+    "adapter": "realstatus_v3",
+    "base_url": "https://www.pisti-realestate.gr",
+    "city": "Θεσσαλονίκη",
+    "deal": "sale",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-elegance",
+    "name": "Elegance Real Estate",
+    "adapter": "realstatus_seo",
+    "base_url": "https://www.elegancerealestate.gr",
+    "list_paths": [
+      "listings/for/1"
+    ],
+    "page_format": "/page/{page}",
+    "deal": "sale",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-fithome",
+    "name": "FIT HOME",
+    "adapter": "realstatus_v3",
+    "base_url": "https://fithome.gr",
+    "city": "Θεσσαλονίκη",
+    "deal": "sale",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-thesmos",
+    "name": "ΘΕΣΜΟΣ",
+    "adapter": "realstatus_v3",
+    "base_url": "https://thesmosmesitiko.gr",
+    "city": "Θεσσαλονίκη",
+    "deal": "sale",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-luxuryrealestate",
+    "name": "Luxury Real Estate",
+    "adapter": "realstatus_v3",
+    "base_url": "https://luxuryrealestate.gr",
+    "deal": "sale",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-skoreal",
+    "name": "SkoReal",
+    "adapter": "realstatus_seo",
+    "base_url": "https://skoreal.gr",
+    "list_paths": [
+      "polisi-katoikies",
+      "polisi-epaggelmatikoichoroi",
+      "polisi-gi",
+      "polisi-loipeskatigories"
+    ],
+    "deal": "sale",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-domino",
+    "name": "Domino Real Estate",
+    "adapter": "realstatus_seo",
+    "base_url": "https://www.domino-estate.gr",
+    "list_paths": [
+      "poliseis-akiniton"
+    ],
+    "deal": "sale",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-dehome",
+    "name": "De Home",
+    "adapter": "estateplus_v2",
+    "base_url": "https://dehome.gr",
+    "deal": "sale",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-clock",
+    "name": "CLOCK REAL ESTATE",
+    "adapter": "estateplus_pxp",
+    "base_url": "https://clockrealestate.gr",
+    "deal": "sale",
+    "region": "Θεσσαλονίκη"
+  },
+  {
+    "id": "thess-terrahomes",
+    "name": "TERRA & HOMES",
+    "adapter": "realstatus_seo",
+    "base_url": "https://www.terrahomes.gr",
+    "list_paths": [
+      "poliseis-akiniton"
+    ],
+    "deal": "sale",
+    "region": "Θεσσαλονίκη"
+  }
+]

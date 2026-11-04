@@ -1,0 +1,49 @@
+name: scrape
+on:
+  schedule:
+    - cron: "17 * * * *"   # hourly (public repos have unlimited Actions minutes)
+  workflow_dispatch:
+permissions:
+  contents: write   # push the data branch
+  pages: write      # publish the dashboard
+  id-token: write
+concurrency: scrape
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12", cache: pip }
+      - run: pip install -r requirements.txt
+
+      # the listings live on a `data` branch that holds a single commit, so hourly
+      # updates don't pile up in the repo's history (the copy in main only seeds the first run)
+      - name: Get the last run's listings
+        run: |
+          if git fetch --depth=1 origin data; then git show FETCH_HEAD:listings.json > data/listings.json
+          else echo "no data branch yet: starting from the copy in the repo"; fi
+
+      - run: python -m scraper.run
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          PREFERENCES_JSON: ${{ secrets.PREFERENCES_JSON }}   # optional: keeps saved searches private
+
+      - name: Save listings to the data branch
+        run: |
+          mkdir /tmp/data && cp data/listings.json /tmp/data/ && cd /tmp/data
+          git init -q -b data && git add listings.json
+          git -c user.name=scraper-bot -c user.email=scraper-bot@users.noreply.github.com commit -qm "listings"
+          git push -fq "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" data
+
+      - name: Build the dashboard
+        run: mkdir -p _site/data && cp index.html _site/ && cp data/listings.json _site/data/
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: _site }
+      - id: deploy
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Listings Radar</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.min.js"></script>
+<style>
+  :root {
+    --bg: #f6f5f2; --panel: #ffffff; --text: #1d1d1b; --muted: #6b6a66; --line: #e4e2dc;
+    --accent: #1f6f5c; --accent-soft: #e3f1ec; --new: #c2410c; --drop: #1d4ed8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #141413; --panel: #1e1e1c; --text: #ecebe7; --muted: #9c9a94; --line: #2f2e2b;
+            --accent: #5fbfa3; --accent-soft: #1f322c; --new: #fb923c; --drop: #7aa2ff; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  header { padding: 20px 24px 8px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px; }
+  header h1 { margin: 0; font-size: 20px; }
+  header .meta { color: var(--muted); }
+  .layout { display: grid; grid-template-columns: 260px 1fr; gap: 20px; padding: 12px 24px 40px; }
+  aside { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px; align-self: start;
+          position: sticky; top: 12px; max-height: calc(100vh - 24px); overflow-y: auto;
+          display: grid; grid-template-columns: 1fr 1fr; gap: 8px 8px; align-content: start; }
+  aside .f { min-width: 0; }
+  aside .wide { grid-column: 1 / -1; }
+  aside label { display: block; font-size: 12px; color: var(--muted); margin: 0 0 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  aside input, aside select { padding: 6px 8px; }
+  aside .checks { display: flex; flex-direction: column; gap: 4px; margin-top: 4px; padding-top: 8px; border-top: 1px solid var(--line); }
+  aside .checks label { display: flex; align-items: center; gap: 6px; margin: 0; color: var(--text); font-size: 13px; white-space: normal; cursor: pointer; }
+  aside .checks input { width: auto; margin: 0; }
+  input, select { width: 100%; padding: 7px 9px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--text); font: inherit; }
+  .row { display: flex; gap: 6px; }
+  .seg { display: flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .seg button { flex: 1; border: 0; background: transparent; color: var(--text); padding: 7px; cursor: pointer; font: inherit; }
+  .seg button.on { background: var(--accent); color: #fff; }
+  .reset { margin-top: 4px; width: 100%; padding: 8px; border: 1px solid var(--line); border-radius: 8px; background: transparent; color: var(--muted); cursor: pointer; }
+  .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 12px; }
+  .toolbar select { width: auto; }
+  .count { color: var(--muted); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; color: inherit; transition: transform .12s; }
+  .card:hover { transform: translateY(-2px); }
+  .card > a { color: inherit; text-decoration: none; }
+  .agencies { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line); }
+  .agencies .label { width: 100%; font-size: 12px; color: var(--muted); }
+  .agencies a { font-size: 12px; text-decoration: none; }
+  .agencies a:hover { text-decoration: underline; }
+  .badge.multi { color: var(--accent); }
+  .more[hidden] { display: none; }
+  .views { display: flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin-left: auto; }
+  .views button { border: 0; background: var(--panel); color: var(--text); padding: 6px 14px; font: inherit; cursor: pointer; }
+  .views button.on { background: var(--accent); color: #fff; }
+  #map { height: calc(100vh - 150px); min-height: 420px; border-radius: 10px; border: 1px solid var(--line); }
+  #map[hidden], .grid[hidden], .mapnote[hidden] { display: none; }
+  .mapnote { color: var(--muted); font-size: 13px; margin: 8px 2px 0; }
+  #map { background: var(--bg); }
+  .leaflet-container { font: inherit; }
+  .cluster { display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #e85d5d;
+             color: #fff; font-size: 12px; font-weight: 700; border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,.3); }
+  .leaflet-tooltip.price { background: var(--panel); color: var(--text); border: 1px solid var(--line); box-shadow: none;
+                           font-weight: 600; padding: 2px 6px; }
+  .leaflet-tooltip.price::before { display: none; }
+  .mapnote { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: center; }
+  .mapnote .dot { display: inline-block; width: 11px; height: 11px; border-radius: 50%; margin-right: 5px; vertical-align: -1px;
+                  background: #e85d5d; opacity: .45; box-shadow: 0 0 0 1.5px #fff, 0 1px 2px rgba(0,0,0,.4); }
+  .mapnote .dot.exact { opacity: 1; }
+  .mapnote label { display: inline-flex; align-items: center; gap: 5px; cursor: pointer; }
+  .mapnote input { width: auto; margin: 0; }
+  .leaflet-popup-content { margin: 0; width: 260px !important; }
+  .leaflet-popup-content .card { border: 0; box-shadow: none; }
+  .leaflet-popup-content .card .img { height: 140px; }
+  .more { display: block; margin: 20px auto 0; padding: 9px 18px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); color: var(--text); cursor: pointer; font: inherit; }
+  .card .img { aspect-ratio: 4/3; background: var(--line); position: relative; }
+  .card .img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .badges { position: absolute; top: 8px; left: 8px; display: flex; gap: 6px; }
+  .badge { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--panel); }
+  .badge.new { color: var(--new); } .badge.drop { color: var(--drop); } .badge.gone { color: var(--muted); }
+  .card .body { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 4px; }
+  .price { font-size: 18px; font-weight: 700; }
+  .price small { font-size: 12px; font-weight: 400; color: var(--muted); }
+  .title { font-weight: 500; }
+  .facts { color: var(--muted); font-size: 13px; }
+  .foot { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-top: 6px; }
+  .src { background: var(--accent-soft); color: var(--accent); padding: 1px 8px; border-radius: 999px; }
+  .empty { padding: 60px; text-align: center; color: var(--muted); }
+  /* desktop: the page never scrolls, only the listings column does, so the filters stay put */
+  @media (min-width: 761px) {
+    body { height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+    header { flex: none; }
+    .layout { flex: 1; min-height: 0; padding-bottom: 12px; }
+    aside { position: static; max-height: 100%; overscroll-behavior: contain; }
+    main { min-height: 0; overflow-y: auto; padding-bottom: 28px; }
+    #map { height: calc(100vh - 190px); }
+  }
+  @media (max-width: 760px) {
+    header { padding: 16px 16px 4px; }
+    .layout { grid-template-columns: 1fr; padding: 8px 16px 32px; }
+    aside { position: static; max-height: none; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Listings Radar</h1>
+  <span class="meta" id="meta">Loading…</span>
+</header>
+<div class="layout">
+  <aside>
+    <div class="f"><label for="region">City</label>
+      <select id="region"><option value="">All cities</option></select></div>
+    <div class="f"><label for="type">Type</label>
+      <select id="type"><option value="">All types</option></select></div>
+    <div class="f"><label for="pmin">Price from (€)</label><input id="pmin" type="number" placeholder="min"></div>
+    <div class="f"><label for="pmax">to</label><input id="pmax" type="number" placeholder="max"></div>
+    <div class="f"><label for="smin">Size from (m²)</label><input id="smin" type="number" placeholder="min"></div>
+    <div class="f"><label for="smax">to</label><input id="smax" type="number" placeholder="max"></div>
+    <div class="f"><label for="fmin" title="flats, shops, offices">Floor from</label>
+      <select id="fmin"><option value="">Any</option></select></div>
+    <div class="f"><label for="fmax">to</label>
+      <select id="fmax"><option value="">Any</option></select></div>
+    <div class="f"><label for="beds">Bedrooms</label>
+      <select id="beds"><option value="">Any</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option></select></div>
+    <div class="f"><label for="lift">Elevator</label>
+      <select id="lift">
+        <option value="">Any</option>
+        <option value="yes" selected>Yes</option>
+        <option value="yes-or-unknown">Yes or not stated</option>
+        <option value="no">No</option>
+      </select></div>
+    <div class="f wide"><label for="site">Agency</label>
+      <select id="site"><option value="">All agencies</option></select></div>
+    <div class="f wide"><label for="fresh">First seen</label>
+      <select id="fresh"><option value="">Any time</option><option value="1">Last 24h</option><option value="3">Last 3 days</option><option value="7">Last 7 days</option></select></div>
+    <div class="checks wide">
+      <label title="Καλαμαριά, Πυλαία, Θέρμη, Πανόραμα, Εύοσμος, Σταυρούπολη, Πολίχνη, Συκιές, Νεάπολη, Περαία …"><input id="showSuburbs" type="checkbox"> Thessaloniki suburbs</label>
+      <label title="Thessaloniki agencies also sell holiday homes in Χαλκιδική, on islands, in Athens and abroad"><input id="showOutside" type="checkbox"> Χαλκιδική, abroad &amp; other regions</label>
+      <label><input id="showGone" type="checkbox"> Removed listings</label>
+    </div>
+    <button class="reset wide" id="reset">Reset filters</button>
+  </aside>
+  <main>
+    <div class="toolbar">
+      <span class="count" id="count"></span>
+      <select id="sort">
+        <option value="new">Newest first</option>
+        <option value="pasc">Price ↑</option>
+        <option value="pdesc">Price ↓</option>
+        <option value="ppsqm">€/m² ↑</option>
+        <option value="sqm">Size ↓</option>
+      </select>
+      <div class="views"><button id="viewList" class="on">List</button><button id="viewMap">Map</button></div>
+    </div>
+    <div class="grid" id="grid"></div>
+    <div id="map" hidden></div>
+    <div class="mapnote" id="mapnote" hidden>
+      <span id="mapcount"></span><span id="legend"></span>
+      <label><input id="exactOnly" type="checkbox"> Exact locations only</label>
+    </div>
+    <button class="more" id="more" hidden>Show more</button>
+  </main>
+</div>
+<script>
+const $ = id => document.getElementById(id);
+const eur = n => n == null ? "—" : "€" + n.toLocaleString("el-GR");
+const DAY = 864e5;
+// agency sites serve full-size originals (~800 KB); free wsrv.nl proxy resizes them, falls back to original on error
+const thumb = url => `https://wsrv.nl/?url=${encodeURIComponent(url)}&w=480&h=360&fit=cover&output=webp`;
+let all = [], properties = [], sites = {}, shown = 0, list = [];
+const PAGE = 300;
+// listings captured in a site's first import aren't "new", they were already there
+const isNew = l => l.first_seen > (sites[l.site]?.first_import || "") && daysAgo(l.first_seen) <= 2;
+
+// the scraper marks the same property listed by several agencies with one `group` id
+function buildProperties(listings) {
+  const byGroup = new Map();
+  for (const l of listings) {
+    const key = l.group || l.uid;
+    if (!byGroup.has(key)) byGroup.set(key, []);
+    byGroup.get(key).push(l);
+  }
+  return [...byGroup.values()].map(members => {
+    members.sort((a, b) => (a.price ?? Infinity) - (b.price ?? Infinity));
+    // show the most informative listing: has a photo, bedrooms, the most specific place
+    const main = [...members].sort((a, b) =>
+      (!!b.image - !!a.image) || ((b.bedrooms != null) - (a.bedrooms != null)) ||
+      ((b.location || "").length - (a.location || "").length))[0];
+    const prices = members.map(m => m.price).filter(p => p != null);
+    const earliest = members.reduce((a, b) => a.first_seen <= b.first_seen ? a : b);
+    return {
+      members, main, earliest,
+      price: prices.length ? Math.min(...prices) : null,
+      maxPrice: prices.length ? Math.max(...prices) : null,
+      sqm: main.sqm ?? members.find(m => m.sqm)?.sqm ?? null,
+      bedrooms: main.bedrooms ?? members.find(m => m.bedrooms != null)?.bedrooms ?? null,
+      floor: main.floor ?? members.find(m => m.floor != null)?.floor ?? null,
+      // agencies mostly mention an elevator only when there is one: any "yes" wins
+      elevator: members.some(m => m.elevator === true) ? true : members.some(m => m.elevator === false) ? false : null,
+      first_seen: earliest.first_seen,
+      site_rank: Math.min(...members.map(m => m.site_rank ?? 1e9)),
+      active: members.some(m => m.active),
+      zone: members.find(m => m.zone)?.zone || null,
+      // an agency that published the exact map point beats an area-level position
+      pos: (members.find(m => m.exact) || (main.pos ? main : members.find(m => m.pos)))?.pos || null,
+      exact: members.some(m => m.exact),
+    };
+  });
+}
+
+function daysAgo(iso) { return (Date.now() - new Date(iso)) / DAY; }
+const FLOORS = [[-1, "Basement"], [0, "Ground floor"], [0.5, "Mezzanine"], [1, "1st floor"], [2, "2nd floor"],
+                [3, "3rd floor"], [4, "4th floor"], [5, "5th floor"], [6, "6th floor+"]];
+function floorName(f) {
+  if (f == null) return "";
+  const hit = FLOORS.find(([v]) => v === f);
+  return hit ? hit[1] : `${f}th floor`;
+}
+function availability(l) {
+  if (!l.available_from || new Date(l.available_from) <= new Date()) return "";
+  return ` · from ${new Date(l.available_from).toLocaleDateString("el-GR")}`;
+}
+
+function fillSelect(el, values) {
+  [...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b, "el"))
+    .forEach(v => el.insertAdjacentHTML("beforeend", `<option>${v}</option>`));
+}
+
+function render() {
+  const num = id => $(id).value === "" ? null : +$(id).value;
+  const [pmin, pmax, smin, smax, beds, fresh, fmin, fmax] = ["pmin", "pmax", "smin", "smax", "beds", "fresh", "fmin", "fmax"].map(num);
+  const lift = $("lift").value;
+  // a property passes if any agency's listing of it passes (agency, area and text filters)
+  const any = (p, f) => p.members.some(f);
+  list = properties.filter(p =>
+    (p.active || $("showGone").checked) &&
+    (!p.zone || (p.zone === "Προάστια" ? $("showSuburbs").checked : $("showOutside").checked)) &&
+    any(p, l => l.deal !== "rent") &&
+    (!$("type").value || any(p, l => l.type === $("type").value)) &&
+    (!$("site").value || any(p, l => l.site_name === $("site").value)) &&
+    (!$("region").value || any(p, l => (l.region || "Ιωάννινα") === $("region").value)) &&
+    (pmin == null || p.price >= pmin) && (pmax == null || p.price <= pmax) &&
+    (smin == null || p.sqm >= smin) && (smax == null || p.sqm <= smax) &&
+    (beds == null || p.bedrooms == null || p.bedrooms >= beds) &&  // unknown bedrooms stay visible
+    // floor is stated for ~95% of flats, so a floor filter shows only listings that state it
+    (fmin == null || (p.floor != null && p.floor >= fmin)) && (fmax == null || (p.floor != null && p.floor <= fmax)) &&
+    (!lift || (lift === "yes" && p.elevator === true) || (lift === "no" && p.elevator === false) ||
+      (lift === "yes-or-unknown" && p.elevator !== false)) &&
+    (fresh == null || daysAgo(p.first_seen) <= fresh)
+  );
+  const ppsqm = l => l.price && l.sqm ? l.price / l.sqm : Infinity;
+  const sorters = {
+    // first seen by us, then the agency's own "newest published" order
+    new: (a, b) => b.first_seen.localeCompare(a.first_seen) || (a.site_rank ?? 1e9) - (b.site_rank ?? 1e9),
+    pasc: (a, b) => a.price - b.price, pdesc: (a, b) => b.price - a.price,
+    ppsqm: (a, b) => ppsqm(a) - ppsqm(b), sqm: (a, b) => b.sqm - a.sqm,
+  };
+  list.sort(sorters[$("sort").value]);
+  const listings = list.reduce((n, p) => n + p.members.length, 0);
+  $("count").textContent = `${list.length} propert${list.length === 1 ? "y" : "ies"}` +
+    (listings > list.length ? ` (${listings} listings, duplicates merged)` : "");
+  if (view === "map") return drawMap();
+  shown = 0;
+  $("grid").innerHTML = list.length ? "" : `<div class="empty">No listings match these filters.</div>`;
+  showMore();
+}
+
+// map: a dot per property, solid where the agency published the exact point, faded at the
+// neighbourhood otherwise (scraper/geo.py)
+let view = "list", map = null, pins = null, fitNext = true;
+const short = n => n == null ? "?" : n >= 1e6 ? `€${(n / 1e6).toFixed(n >= 1e7 ? 0 : 1)}M` : `€${Math.round(n / 1e3)}k`;
+const dark = matchMedia("(prefers-color-scheme: dark)").matches;
+function drawMap() {
+  if (!map) {
+    map = L.map("map", { preferCanvas: true, zoomControl: false }).setView([40.63, 22.95], 13);
+    L.control.zoom({ position: "bottomright" }).addTo(map);
+    // Esri's grey canvas: a quiet, keyless base map; street names come from its separate label layer
+    const esri = layer => `https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/${layer}/MapServer/tile/{z}/{y}/{x}`;
+    const tone = dark ? "World_Dark_Gray" : "World_Light_Gray";
+    L.tileLayer(esri(`${tone}_Base`), { maxZoom: 19, maxNativeZoom: 16, attribution: "Tiles &copy; Esri &mdash; Esri, HERE, Garmin, &copy; OpenStreetMap contributors" }).addTo(map);
+    L.tileLayer(esri(`${tone}_Reference`), { maxZoom: 19, maxNativeZoom: 16 }).addTo(map);
+    pins = L.markerClusterGroup({
+      // every property is its own dot; only dots on (almost) the same spot share a numbered one
+      chunkedLoading: true, maxClusterRadius: 3, showCoverageOnHover: false, zoomToBoundsOnClick: false,
+      iconCreateFunction: c => {
+        const n = c.getChildCount(), size = n < 10 ? 22 : n < 100 ? 26 : 30;
+        return L.divIcon({ html: n, className: "cluster", iconSize: [size, size] });
+      },
+    });
+    pins.on("clusterclick", e => e.layer.spiderfy());  // fan the stacked dots out where they are
+    map.addLayer(pins);
+  }
+  pins.clearLayers();
+  const placed = list.filter(p => p.pos && (p.exact || !$("exactOnly").checked));
+  pins.addLayers(placed.map(p => {
+    // solid where the agency published the exact point, faded where only the neighbourhood is known
+    const m = L.circleMarker(p.pos, { radius: 7, color: "#fff", weight: 2, fillColor: "#e85d5d",
+      fillOpacity: p.exact ? 1 : .45, opacity: p.exact ? 1 : .7 });
+    m.bindTooltip(short(p.price), { className: "price", direction: "top", offset: [0, -6] });
+    m.bindPopup(() => card(p), { maxWidth: 260 });
+    return m;
+  }));
+  const exact = placed.filter(p => p.exact).length, missing = list.filter(p => !p.pos).length;
+  $("mapcount").textContent = `${placed.length} on the map` + (missing ? ` · ${missing} without a location` : "");
+  $("legend").innerHTML = `<span><span class="dot exact"></span>exact location (${exact})</span>` +
+    `<span><span class="dot"></span>neighbourhood only (${placed.length - exact})</span>`;
+  if (fitNext && placed.length) {  // frame the middle 96% of dots, so one far-off listing doesn't zoom the map out
+    const cut = (v, q) => v.sort((a, b) => a - b)[Math.floor(q * (v.length - 1))];
+    const lat = placed.map(p => p.pos[0]), lng = placed.map(p => p.pos[1]);
+    map.fitBounds([[cut(lat, .02), cut(lng, .02)], [cut(lat, .98), cut(lng, .98)]], { maxZoom: 15, padding: [20, 20] });
+    fitNext = false;
+  }
+}
+function setView(v) {
+  view = v;
+  $("viewList").classList.toggle("on", v === "list"); $("viewMap").classList.toggle("on", v === "map");
+  $("grid").hidden = $("more").hidden = v === "map";
+  $("map").hidden = $("mapnote").hidden = v !== "map";
+  if (v === "map") { fitNext = fitNext || !map; render(); setTimeout(() => map.invalidateSize(), 0); } else render();
+}
+
+function showMore() {
+  $("grid").insertAdjacentHTML("beforeend", list.slice(shown, shown + PAGE).map(card).join(""));
+  shown = Math.min(shown + PAGE, list.length);
+  $("more").hidden = shown >= list.length;
+  $("more").textContent = `Show more (${list.length - shown} left)`;
+}
+
+function card(p) {
+  const l = p.main;
+  const drop = p.members.some(m => { const h = m.price_history || []; return h.length > 1 && m.price < h[h.length - 2][1]; });
+  const badges = [
+    isNew(p.earliest) ? `<span class="badge new">NEW</span>` : "",
+    drop ? `<span class="badge drop">Price ↓</span>` : "",
+    p.members.length > 1 ? `<span class="badge multi">${p.members.length} agencies</span>` : "",
+    !p.active ? `<span class="badge gone">Removed</span>` : "",
+    p.zone ? `<span class="badge gone">${p.zone}</span>` : "",
+  ].join("");
+  const priceText = p.maxPrice && p.maxPrice !== p.price ? `${eur(p.price)}–${eur(p.maxPrice).slice(1)}` : eur(p.price);
+  const per = p.price && p.sqm ? `<small> · ${eur(Math.round(p.price / p.sqm))}/m²</small>` : "";
+  const facts = [p.sqm && `${p.sqm} m²`, p.bedrooms && `${p.bedrooms} bd`, floorName(p.floor),
+    p.elevator === true ? "elevator" : p.elevator === false ? "no elevator" : ""].filter(Boolean).join(" · ");
+  const links = p.members.map(m => `<a class="src" href="${m.url}" target="_blank" rel="noopener"
+      title="${m.code || ""}">${m.site_name}${p.members.length > 1 && m.price ? ` · ${eur(m.price)}` : ""} ↗</a>`).join("");
+  return `<div class="card">
+    <a href="${l.url}" target="_blank" rel="noopener" class="img">${l.image ? `<img src="${thumb(l.image)}" loading="lazy" alt="" onerror="this.onerror=null;this.src='${l.image}'">` : ""}<div class="badges">${badges}</div></a>
+    <div class="body">
+      <div class="price">${priceText}${per}</div>
+      <div class="title">${l.type || l.title}</div>
+      <div class="facts">${facts}</div>
+      <div class="facts">📍 ${l.location}${availability(l)}</div>
+      <div class="agencies"><span class="label">Listed by</span>${links}</div>
+    </div></div>`;
+}
+
+// the file leaves out what can be worked out again (see scraper/store.py); put it back
+function unpack(db) {
+  for (const [uid, l] of Object.entries(db.listings)) {
+    const site = uid.slice(0, uid.indexOf(":")), info = db.sites[site] || {};
+    l.uid = uid; l.site = site; l.deal = l.deal || "sale";
+    l.site_name = l.site_name || info.name || site;
+    l.region = l.region || info.region || "Ιωάννινα";
+    l.active = l.active !== false;
+    l.group = l.group || uid;
+    l.last_seen = l.last_seen || db.updated_at;
+    l.price_history = l.price_history || [[l.first_seen, l.price]];
+    l.location = [l.area, l.city].filter(Boolean).join(", ");
+  }
+  return db;
+}
+
+fetch("data/listings.json", { cache: "no-store" }).then(r => r.json()).then(unpack).then(db => {
+  all = Object.values(db.listings); sites = db.sites;
+  properties = buildProperties(all);
+  const activeProps = properties.filter(p => p.active).length;
+  $("meta").textContent = `${activeProps} properties (${all.filter(l => l.active).length} listings) from ${Object.keys(db.sites).length} agencies · updated ${new Date(db.updated_at).toLocaleString()}`;
+  fillSelect($("type"), all.map(l => l.type));
+  fillSelect($("site"), all.map(l => l.site_name));
+  fillSelect($("region"), all.map(l => l.region || "Ιωάννινα"));
+  // the agency list follows the chosen city, so it stays short
+  $("region").addEventListener("input", () => {
+    const r = $("region").value, inRegion = all.filter(l => !r || (l.region || "Ιωάννινα") === r);
+    for (const [id, field, label] of [["site", "site_name", "All agencies"]]) {
+      $(id).innerHTML = `<option value="">${label}</option>`;
+      fillSelect($(id), inRegion.map(l => l[field]));
+    }
+    render();
+  });
+  for (const [v, name] of FLOORS) {
+    $("fmin").insertAdjacentHTML("beforeend", `<option value="${v}">${name.replace("+", " or higher")}</option>`);
+    // "to 6th floor+" means no upper limit beyond the 6th
+    $("fmax").insertAdjacentHTML("beforeend", `<option value="${v === 6 ? 99 : v}">${name.replace("+", " or higher")}</option>`);
+  }
+  render();
+}).catch(e => { $("meta").textContent = "Could not load data/listings.json — " + e; });
+
+document.querySelectorAll("aside input, aside select, #sort").forEach(el => el.addEventListener("input", render));
+$("more").addEventListener("click", showMore);
+$("viewList").addEventListener("click", () => setView("list"));
+$("viewMap").addEventListener("click", () => setView("map"));
+$("exactOnly").addEventListener("input", drawMap);
+$("region").addEventListener("input", () => { fitNext = true; });
+$("reset").addEventListener("click", () => {
+  document.querySelectorAll("aside input").forEach(i => i.type === "checkbox" ? i.checked = false : i.value = "");
+  document.querySelectorAll("aside select").forEach(s => s.value = "");
+  $("lift").value = "yes";  // the default: listings that say they have an elevator
+  render();
+});
+</script>
+</body>
+</html>
