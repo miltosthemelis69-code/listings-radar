@@ -87,6 +87,13 @@ OTHER_GREECE = _words(
            "ροδος", "βουλα", "σερβια", "κως", "χανια", "chania", "ηλεια", "πυλος", "κρανιδι", "δραμα", "drama",
            "αλεξανδρεια", "alexandreia", "πλατυ", "plati", "υδρα", "ελληνικο", "dion", "νικαια", "nikaia"],
 )
+# Ioannina agencies also sell on the coast and in the neighbouring prefectures
+OTHER_EPIRUS = _words(
+    ["πρεβεζ", "preveza", "παργα", "parga", "συβοτα", "sivota", "syvota", "λευκαδ", "lefkad", "γρεβεν", "greven",
+     "κερκυρ", "kerkyr", "corfu", "ηγουμενιτσ", "igoumenits", "θεσπρωτ", "φιλιππιαδ", "ζαλογγ", "καστορι",
+     "κοζαν", "τρικαλ", "αιτωλοακαρναν", "αγρινι", "μεσολογγ"],
+    whole=["αρτα", "arta", "αρτας", "αρτης"],
+)
 # a place name that names its own city wins: "Θεσσαλονίκη, Κηφισιά" is not Athens
 HOME = {"Θεσσαλονίκη": _words(["θεσσαλονικ", "thessalonik", "καλαμαρι", "kalamari", "πυλαι", "pylai",
                               "pylea", "θερμη", "thermi", "ευοσμ", "evosm", "πανοραμα"])}
@@ -100,8 +107,7 @@ def zone(listing):
     at_home = bool(home and home.search(place))
     chalkidiki = CHALKIDIKI if region == "Θεσσαλονίκη" else CHALKIDIKI_STRONG
     checks = [("Χαλκιδική", chalkidiki), ("Εξωτερικό", ABROAD)]
-    if region == "Θεσσαλονίκη":
-        checks.append(("Άλλη περιοχή", OTHER_GREECE))
+    checks.append(("Άλλη περιοχή", OTHER_GREECE if region == "Θεσσαλονίκη" else OTHER_EPIRUS))
     for name, pattern in checks:
         # the place field decides; the title only when the place doesn't name the city itself
         # ("Θέρμη" + "θέα σε Χαλκιδική" stays local; "Θεσσαλονίκη, Κηφισιά" is not Athens)

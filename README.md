@@ -37,7 +37,7 @@ for new listings matching your saved searches. Runs entirely on free tiers.
   `floor`: -1 basement, 0 ground, 0.5 mezzanine, 1, 2, …; `elevator`: true / false / null (not stated).
   Saved searches can use `min_floor`, `max_floor` and `"elevator": true`
 - `scraper/dedupe.py` – the same property listed by several agencies gets one `group` id
-  (matched on type, size, price and place). The dashboard shows one card per property with
+  (matched on city, type, size, price and place; "Κέντρο" alone doesn't count as a place). The dashboard shows one card per property with
   a link to every agency; alerts go out once per property, and not at all when an agency
   adds a property another agency already listed
 - Rented/sold listings that agencies keep online are skipped
@@ -46,12 +46,16 @@ for new listings matching your saved searches. Runs entirely on free tiers.
   "Χαλκιδική", "Εξωτερικό", "Άλλη περιοχή"). For Thessaloniki only the city itself (Δήμος
   Θεσσαλονίκης: Κέντρο, Τούμπα, Χαριλάου, Ανάληψη, Φάληρο, Άνω Πόλη …) counts; Καλαμαριά, Πυλαία,
   Θέρμη, Σταυρούπολη, Πολίχνη, Συκιές and the other municipalities are "Προάστια". Agencies also sell
-  holiday homes in Χαλκιδική, on islands, in Athens and Cyprus. The dashboard hides all of these
+  holiday homes in Χαλκιδική, on islands, in Athens and Cyprus; Ioannina agencies in Preveza, Parga,
+  Lefkada and Arta. The dashboard hides all of these
   unless "Include Thessaloniki suburbs" / "Include Χαλκιδική, abroad & other regions" is ticked;
   saved searches skip them unless they set `"include_suburbs": true` / `"include_outside": true`
-- `scraper/geo.py` – map positions: each area name is looked up once on OpenStreetMap's Nominatim
-  (cached in the data file's "geo" table, at most 150 new names per run), so pins mark the
-  neighbourhood, not the building. `scripts/geocode_backlog.py` looks up everything at once
+- `scraper/geo.py` – map positions: the property's own map point from its page when there is one
+  (not the agency's office; a point outside the agency's prefecture marks the listing "Άλλη
+  περιοχή"). Otherwise each area name is looked up once on OpenStreetMap's Nominatim (places
+  only, not streets; cached in the data file's "geo" table, at most 150 new names per run) and
+  of same-named places the one nearest the listing's city or broader area is used, so those pins
+  mark the neighbourhood, not the building. `scripts/geocode_backlog.py` looks up everything at once
 - `preferences.json` – saved searches that trigger Telegram alerts (or the `PREFERENCES_JSON`
   secret, so they stay private on a public repo)
 - `data/listings.json` – all listings with first seen, price history, active flag, in a compact

@@ -2,7 +2,7 @@
 
 Agencies don't share ids, so we match on what they all publish: type, size, price and
 place. Two listings from different agencies are the same property when they have the
-same standard type, size within 1 m² (or 1%), and:
+same city (the agency's region), standard type, size within 1 m² (or 1%), and:
   - both name a specific place (an area or town other than plain "Ιωάννινα") and the
     places agree: price within 3% (agencies sometimes add their commission);
   - one names no specific place: size must match exactly, not be a round number
@@ -16,13 +16,16 @@ from collections import defaultdict
 
 from scraper.common import normalize
 
-GENERIC_PLACES = {"", "ιωαννινα", "ν. ιωαννινων", "υπολοιπες περιοχες", "λοιπες περιοχες", "ηπειρος", "ελλαδα"}
+# names every listing of a city shares: "Κέντρο" and "Θεσσαλονίκη κέντρο" don't say two flats are the same
+GENERIC_PLACES = {"", "ιωαννινα", "ν. ιωαννινων", "υπολοιπες περιοχες", "λοιπες περιοχες", "ηπειρος", "ελλαδα",
+                  "κεντρο", "ιστορικο κεντρο", "μακεδονια", "θεσσαλονικη"}
 
 
 def places(l):
     """Specific place names a listing mentions, normalized: {'κατσικας', 'παμβωτιδα'}."""
     names = [l.get("city") or ""] + (l.get("area") or "").split(",")
-    return {normalize(n).strip() for n in names} - GENERIC_PLACES
+    out = {normalize(n).strip() for n in names} - GENERIC_PLACES
+    return {n for n in out if not n.startswith("θεσσαλονικη ")}  # "θεσσαλονικη κεντρο", "… περιφ/κοι δημοι"
 
 
 def places_agree(pa, pb):
@@ -36,7 +39,7 @@ def _close(a, b, rel, absolute=0):
 
 def match_score(a, b):
     """None if not the same property; otherwise a sort key (lower = stronger match)."""
-    if a["site"] == b["site"] or a.get("type") != b.get("type"):
+    if a["site"] == b["site"] or a.get("type") != b.get("type") or a.get("region") != b.get("region"):
         return None
     if not (a.get("price") and b.get("price") and a.get("sqm") and b.get("sqm")):
         return None
