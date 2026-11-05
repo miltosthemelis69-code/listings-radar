@@ -214,6 +214,7 @@ function buildProperties(listings) {
 function daysAgo(iso) { return (Date.now() - new Date(iso)) / DAY; }
 const FLOORS = [[-1, "Basement"], [0, "Ground floor"], [0.5, "Mezzanine"], [1, "1st floor"], [2, "2nd floor"],
                 [3, "3rd floor"], [4, "4th floor"], [5, "5th floor"], [6, "6th floor+"]];
+const FLOOR_TYPES = new Set(["Διαμέρισμα", "Studio/Γκαρσονιέρα", "Γραφείο"]);
 function floorName(f) {
   if (f == null) return "";
   const hit = FLOORS.find(([v]) => v === f);
@@ -246,7 +247,9 @@ function render() {
     (smin == null || p.sqm >= smin) && (smax == null || p.sqm <= smax) &&
     (beds == null || p.bedrooms == null || p.bedrooms >= beds) &&  // unknown bedrooms stay visible
     // floor is stated for ~95% of flats, so a floor filter shows only listings that state it
-    (fmin == null || (p.floor != null && p.floor >= fmin)) && (fmax == null || (p.floor != null && p.floor <= fmax)) &&
+    // buildings, workshops and industrial spaces have no floor, so the floor filter leaves them in
+    (!FLOOR_TYPES.has(p.main.type) || (fmin == null || (p.floor != null && p.floor >= fmin)) &&
+      (fmax == null || (p.floor != null && p.floor <= fmax))) &&
     (!lift || (lift === "yes" && p.elevator === true) || (lift === "no" && p.elevator === false) ||
       (lift === "yes-or-unknown" && p.elevator !== false)) &&
     (fresh == null || daysAgo(p.first_seen) <= fresh)
@@ -394,6 +397,7 @@ fetch("data/listings.json", { cache: "no-store" }).then(r => r.json()).then(unpa
     // "to 6th floor+" means no upper limit beyond the 6th
     $("fmax").insertAdjacentHTML("beforeend", `<option value="${v === 6 ? 99 : v}">${name.replace("+", " or higher")}</option>`);
   }
+  $("fmin").value = "1";  // the default: 1st floor and up
   render();
 }).catch(e => { $("meta").textContent = "Could not load data/listings.json — " + e; });
 
@@ -407,6 +411,7 @@ $("reset").addEventListener("click", () => {
   document.querySelectorAll("aside input").forEach(i => i.type === "checkbox" ? i.checked = false : i.value = "");
   document.querySelectorAll("aside select").forEach(s => s.value = "");
   $("lift").value = "yes";  // the default: listings that say they have an elevator
+  $("fmin").value = "1";
   render();
 });
 </script>
