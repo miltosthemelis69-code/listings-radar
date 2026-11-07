@@ -57,6 +57,8 @@ def parse_skoreal_card(card):
     img_url = re.search(r"url\(([^)]+)\)", img.get("style", "")) if img else None
     label = card.select_one(".labels .label")
     price = card.select_one(".price-p") or card.select_one(".listing-price")
+    for old in price.select(".oldprice, del, s") if price else []:
+        old.decompose()  # a reduced price shows the old one first: "175.000 € 170.000 €"
     code = card.select_one(".prop-id b") or card.select_one(".prop-id")
     return {
         "source_id": source_id,
