@@ -158,3 +158,34 @@ def forward(db, preferences, log=print):
         except Exception:
             pass
     return sent
+
+
+def check():
+    """For the test run: can we read the inbox, and how many portal alert emails are there?"""
+    user, password = os.environ.get("ALERT_EMAIL"), os.environ.get("ALERT_EMAIL_APP_PASSWORD")
+    if not user or not password:
+        return "📭 Portal email alerts: not set up (ALERT_EMAIL / ALERT_EMAIL_APP_PASSWORD missing)."
+    since = (datetime.now(timezone.utc) - timedelta(days=DAYS)).strftime("%d-%b-%Y")
+    try:
+        box = imaplib.IMAP4_SSL(os.environ.get("ALERT_IMAP_HOST") or "imap.gmail.com")
+        box.login(user, password)
+        box.select("INBOX", readonly=True)
+        lines = []
+        for portal, (sender, pattern) in PORTALS.items():
+            _, data = box.search(None, "SINCE", since, "FROM", f'"{sender}"')
+            ids = data[0].split()
+            listings = 0
+            for num in ids:
+                _, parts = box.fetch(num, "(BODY.PEEK[])")
+                listings += len(listings_in(_html(email.message_from_bytes(parts[0][1])), pattern))
+            lines.append(f"• {portal}: {len(ids)} emails in the last {DAYS} days, {listings} listings read from them")
+        box.logout()
+        return "📬 Inbox connected.\n" + "\n".join(lines)
+    except (imaplib.IMAP4.error, OSError) as e:
+        return f"⚠️ Could not read the inbox: {html.escape(str(e))[:200]}"
+
+
+if __name__ == "__main__":
+    text = check()
+    print(text)
+    send_telegram(text)
