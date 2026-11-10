@@ -10,13 +10,32 @@ on:
         description: "Run even if the last run was under 40 minutes ago"
         type: boolean
         default: false
+      test_alert:
+        description: "Only send a test Telegram message (no scan)"
+        type: boolean
+        default: false
 permissions:
   contents: write   # push the data branch
   pages: write      # publish the dashboard
   id-token: write
 concurrency: scrape
 jobs:
+  test-alert:
+    if: inputs.test_alert
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send a test Telegram message
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          curl -sf "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
+            --data-urlencode "text=✅ Listings Radar is connected. New homes matching your saved searches will arrive here." \
+            > /dev/null && echo "sent"
+
   scrape:
+    if: ${{ !inputs.test_alert }}
     runs-on: ubuntu-latest
     timeout-minutes: 45
     environment:
