@@ -68,6 +68,8 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           PREFERENCES_JSON: ${{ secrets.PREFERENCES_JSON }}   # optional: keeps saved searches private
+          ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}                 # optional: forward Spitogatos / xe.gr alert emails
+          ALERT_EMAIL_APP_PASSWORD: ${{ secrets.ALERT_EMAIL_APP_PASSWORD }}
 
       - name: Save listings to the data branch
         if: steps.last.outputs.skip != 'true'

@@ -72,6 +72,6 @@ def save(path, db):
     listings = {uid: pack_listing(uid, l) for uid, l in db["listings"].items()
                 if l.get("active", True) or (l.get("last_seen") or "") >= cutoff}
     out = {"format": FORMAT, "updated_at": db["updated_at"], "sites": db["sites"], "geo": db.get("geo", {}),
-           "listings": listings}
+           "mail_seen": db.get("mail_seen", {}), "listings": listings}
     path.parent.mkdir(exist_ok=True)
     path.write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")

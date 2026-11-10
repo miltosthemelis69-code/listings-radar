@@ -56,6 +56,10 @@ for new listings matching your saved searches. Runs entirely on free tiers.
   only, not streets; cached in the data file's "geo" table, at most 150 new names per run) and
   of same-named places the one nearest the listing's city or broader area is used, so those pins
   mark the neighbourhood, not the building. `scripts/geocode_backlog.py` looks up everything at once
+- `scraper/mailalerts.py` – agencies behind bot protection list on Spitogatos and xe.gr, which email
+  new matches for a saved search. With `ALERT_EMAIL` and `ALERT_EMAIL_APP_PASSWORD` (a Gmail app
+  password) as secrets, each run reads those emails (read-only) and sends each listing in them to
+  Telegram once; the portals' sites are never visited
 - `preferences.json` – saved searches that trigger Telegram alerts (or the `PREFERENCES_JSON`
   secret, so they stay private on a public repo)
 - `data/listings.json` – all listings with first seen, price history, active flag, in a compact

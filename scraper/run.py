@@ -18,6 +18,7 @@ from scraper.details import enrich as enrich_details
 from scraper.notify import notify_new
 from scraper import store
 from scraper.geo import locate
+from scraper.mailalerts import forward as forward_mail_alerts
 from scraper.zones import assign as assign_zones
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -187,6 +188,9 @@ def main():
     if not args.no_notify:
         sent = notify_new(new_properties, preferences)
         print(f"alerts sent: {sent}")
+        # Spitogatos / xe.gr alert emails cover the agencies we can't scan
+        print(f"portal email alerts sent: {forward_mail_alerts(db, preferences)}")
+        store.save(DATA_FILE, db)
 
 
 if __name__ == "__main__":
