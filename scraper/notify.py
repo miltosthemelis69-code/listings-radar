@@ -39,8 +39,11 @@ def matches(listing, pref):
             return False
         if (op == "min" and value < limit) or (op == "max" and value > limit):
             return False
-    # "elevator": true skips only listings that say they have none; unstated still matches
+    # "elevator": true skips only listings that say they have none; unstated still matches.
+    # "elevator": "required" also skips listings that don't mention one (like the dashboard's "Yes")
     if pref.get("elevator") is True and listing.get("elevator") is False:
+        return False
+    if pref.get("elevator") == "required" and listing.get("elevator") is not True:
         return False
     return True
 

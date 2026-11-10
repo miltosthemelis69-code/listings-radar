@@ -35,7 +35,7 @@ for new listings matching your saved searches. Runs entirely on free tiers.
 - `scraper/details.py` – floor and elevator for flats, studios, maisonettes, offices and shops,
   read once from each listing's own page (only new listings cost a request after that).
   `floor`: -1 basement, 0 ground, 0.5 mezzanine, 1, 2, …; `elevator`: true / false / null (not stated).
-  Saved searches can use `min_floor`, `max_floor` and `"elevator": true`
+  Saved searches can use `min_floor`, `max_floor` and `"elevator": true` (or `"required"`: only listings that say they have one)
 - `scraper/dedupe.py` – the same property listed by several agencies gets one `group` id
   (matched on city, type, size, price and place; "Κέντρο" alone doesn't count as a place). The dashboard shows one card per property with
   a link to every agency; alerts go out once per property, and not at all when an agency

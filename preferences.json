@@ -1,21 +1,11 @@
 [
   {
-    "name": "Example: flat for sale in Ioannina centre",
+    "name": "Ioannina & Thessaloniki centre: €40k–90k, 30 m²+, 1st floor+, elevator",
     "deal": "sale",
-    "types": [
-      "Διαμέρισμα"
-    ],
-    "locations": [
-      "Κέντρο"
-    ],
-    "min_price": null,
-    "max_price": 200000,
-    "min_sqm": 60,
-    "max_sqm": null,
-    "min_bedrooms": 2,
-    "min_floor": null,
-    "max_floor": null,
-    "elevator": null,
-    "region": "Ιωάννινα"
+    "min_price": 40000,
+    "max_price": 90000,
+    "min_sqm": 30,
+    "min_floor": 1,
+    "elevator": "required"
   }
 ]
