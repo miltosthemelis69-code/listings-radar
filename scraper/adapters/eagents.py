@@ -18,7 +18,7 @@ from scraper.common import canonical_type, clean, deal_from_text, fetch, parse_i
 
 MAX_PAGES = 100
 LINK = re.compile(r"properties/(\d+)")
-PRICE = re.compile(r"(\d{1,3}(?:\.\d{3})+|\d{3,})\s*(?:,\d+)?\s*€")
+PRICE = re.compile(r"(\d{1,3}(?:\.\d{3})+|\d{3,})\s*(?:,\d+)?\s*€|€\s*(\d{1,3}(?:\.\d{3})+|\d{3,})")  # "170.000 €" or "€170.000"
 SQM = re.compile(r"(\d[\d.,]*)\s*(?:m\s*(?:²|2)\b|τ\.\s?μ\.?|τμ\b)")
 # where each design puts the place name, most specific first
 PLACE_SELECTORS = ["h3.title-sin_item span", "h6.list-title span", ".pxp-results-card-1-details-title > span:first-child",
@@ -79,7 +79,7 @@ def parse_card(card, source_id, list_base):
         "title": summary_text or " ".join(x for x in [kind, f"{sqm.group(1)} m²" if sqm else ""] if x),
         "type": kind,
         "deal": deal_from_text(f"{aim.get_text() if aim else ''} {summary_text} {text}"),
-        "price": parse_price(price.group(1)) if price else None,
+        "price": parse_price(price.group(1) or price.group(2)) if price else None,
         "sqm": parse_sqm(sqm.group(1)) if sqm else None,
         "bedrooms": beds,
         "city": city,

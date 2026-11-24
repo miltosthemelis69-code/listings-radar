@@ -148,6 +148,39 @@
     "base_url": "https://realhouses.gr"
   },
   {
+    "id": "lysis",
+    "name": "Lysis Mesitiki",
+    "adapter": "estateplus",
+    "base_url": "https://lysismesitiki.gr",
+    "deal": "sale"
+  },
+  {
+    "id": "remax-direct",
+    "name": "RE/MAX Direct",
+    "adapter": "eagents",
+    "base_url": "https://www.remax-direct.gr",
+    "params": {
+      "aim": 1
+    },
+    "deal": "sale"
+  },
+  {
+    "id": "citiestate",
+    "name": "Citi Estate",
+    "adapter": "eagents",
+    "base_url": "https://www.citiestate.gr",
+    "params": {
+      "aim": 1
+    },
+    "deal": "sale"
+  },
+  {
+    "id": "epirusproperty",
+    "name": "Epirus Property",
+    "adapter": "houzez",
+    "base_url": "https://epirusproperty.gr"
+  },
+  {
     "id": "thess-abitazione",
     "name": "Abitazione Real Estate",
     "adapter": "realstatus_v2",
