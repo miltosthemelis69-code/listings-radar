@@ -346,7 +346,8 @@
     "base_url": "https://papafi.gr",
     "region": "Θεσσαλονίκη",
     "deal": "sale",
-    "local": true
+    "local": true,
+    "allow_empty": true
   },
   {
     "id": "thess-propertyvision",
@@ -444,9 +445,14 @@
   {
     "id": "thess-anastasiouproperties",
     "name": "ANASTASIOU PROPERTIES",
-    "adapter": "houzez",
-    "base_url": "https://anastasiouproperties.gr",
-    "region": "Θεσσαλονίκη"
+    "adapter": "eagents",
+    "base_url": "https://www.anastasiouproperties.gr",
+    "params": {
+      "aim": 1
+    },
+    "deal": "sale",
+    "region": "Θεσσαλονίκη",
+    "reimport": "2026-11-25"
   },
   {
     "id": "thess-avenuerealestate",
@@ -467,10 +473,14 @@
   {
     "id": "thess-habitatrealestate",
     "name": "HABITAT REAL ESTATE",
-    "adapter": "estateplus",
-    "base_url": "https://habitatrealestate.gr",
+    "adapter": "eagents",
+    "base_url": "https://www.habitatrealestate.gr",
+    "params": {
+      "aim": 1
+    },
+    "deal": "sale",
     "region": "Θεσσαλονίκη",
-    "deal": "sale"
+    "reimport": "2026-11-25"
   },
   {
     "id": "thess-home365gr",
@@ -1206,7 +1216,8 @@
       "polisi-loipeskatigories"
     ],
     "deal": "sale",
-    "region": "Θεσσαλονίκη"
+    "region": "Θεσσαλονίκη",
+    "local": true
   },
   {
     "id": "thess-domino",

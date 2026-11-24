@@ -108,7 +108,10 @@ def main():
 
     for site in sites:
         state = db["sites"].get(site["id"], {})
-        first_run_for_site = not state.get("first_import")
+        # "reimport": the agency moved to another platform, so its listings come back under new
+        # ids: take them in quietly once, like a first import, instead of alerting on all of them
+        reimport = site.get("reimport") if state.get("reimported") != site.get("reimport") else None
+        first_run_for_site = not state.get("first_import") or bool(reimport)
         site_uids = {u for u, l in db["listings"].items() if l["site"] == site["id"]}
         prev_active = sum(1 for u in site_uids if db["listings"][u].get("active") and db["listings"][u].get("type") in KEEP_TYPES)
 
@@ -116,7 +119,8 @@ def main():
         try:
             items, complete = jobs[site["id"]].result()
             # a blocked/broken page can look like "everything was removed"; don't trust a sudden collapse
-            if complete and prev_active >= 10 and len(items) < prev_active * 0.5:
+            # ("allow_empty": the agency's own site really has nothing listed any more)
+            if complete and prev_active >= 10 and len(items) < prev_active * 0.5 and not site.get("allow_empty"):
                 raise RuntimeError(f"only {len(items)} listings vs {prev_active} last time, skipping update")
         except Exception as e:
             print(f"[{site['id']}] FAILED: {e}")
@@ -158,6 +162,8 @@ def main():
             "last_full_scan": now if complete else state.get("last_full_scan"),
             "last_success": now, "count": active, "last_error": None, "region": site.get("region", "Ιωάννινα"),
         }
+        if site.get("reimport"):
+            db["sites"][site["id"]]["reimported"] = site["reimport"]
         site_new = [i for i in new_listings if i["site"] == site["id"]]
         print(f"[{site['id']}] {len(items)} listings read, {active} active, {len(site_new)} new")
         for i in site_new:
