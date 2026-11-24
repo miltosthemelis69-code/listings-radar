@@ -85,6 +85,12 @@ jobs:
       - name: Save listings to the data branch
         if: steps.last.outputs.skip != 'true'
         run: |
+          # the owner's computer scans the agencies that refuse GitHub's servers and saves to the same
+          # branch: take its latest results for those agencies instead of overwriting them
+          if git fetch --depth=1 origin data; then
+            git show FETCH_HEAD:listings.json > /tmp/latest.json
+            python -m scripts.merge_data data/listings.json /tmp/latest.json github
+          fi
           mkdir /tmp/data && cp data/listings.json /tmp/data/ && cd /tmp/data
           git init -q -b data && git add listings.json
           git -c user.name=scraper-bot -c user.email=scraper-bot@users.noreply.github.com commit -qm "listings"

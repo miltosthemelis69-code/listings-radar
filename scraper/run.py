@@ -73,6 +73,8 @@ def main():
     ap.add_argument("--only", help="scrape just these site ids (comma-separated)")
     ap.add_argument("--no-notify", action="store_true")
     ap.add_argument("--full", action="store_true", help="force a full scan of every site")
+    ap.add_argument("--local", action="store_true",
+                    help="scrape only the sites marked \"local\" in sites.json (the ones that refuse GitHub's servers)")
     args = ap.parse_args()
 
     sites = load_json(ROOT / "sites.json", [])
@@ -86,6 +88,9 @@ def main():
     for s in sites:  # the data file keeps each agency's city instead of repeating it per listing
         db["sites"].setdefault(s["id"], {"name": s["name"], "url": s["base_url"]})["region"] = s.get("region", "Ιωάννινα")
     sites = [s for s in sites if not args.only or s["id"] in args.only.split(",")]
+    # some agencies' hosts answer 503 to GitHub's servers but serve a home connection: those are
+    # marked "local" and scanned from the owner's computer (scripts/local_scan.sh), the rest on GitHub
+    sites = [s for s in sites if bool(s.get("local")) == args.local or args.only]
 
     # slow sites: only read the newest pages, with a full scan every `full_scan_hours`
     known = {}
@@ -165,7 +170,8 @@ def main():
     fix_place_spelling(db["listings"].values())
     assign_zones(db["listings"].values())
     locate(db, [l for l in db["listings"].values() if l.get("active")])
-    enrich_details(db["listings"].values(), now)
+    scanned = {s["id"] for s in sites}  # pages of the other side's agencies are read on that side
+    enrich_details([l for l in db["listings"].values() if l["site"] in scanned], now)
     groups = assign_groups(list(db["listings"].values()))
     print(f"{sum(len(g) for g in groups.values())} active listings = {len(groups)} unique properties "
           f"({sum(1 for g in groups.values() if len(g) > 1)} listed by more than one agency)")

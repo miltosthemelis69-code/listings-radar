@@ -56,6 +56,11 @@ for new listings matching your saved searches. Runs entirely on free tiers.
   only, not streets; cached in the data file's "geo" table, at most 150 new names per run) and
   of same-named places the one nearest the listing's city or broader area is used, so those pins
   mark the neighbourhood, not the building. `scripts/geocode_backlog.py` looks up everything at once
+- Agencies marked `"local": true` in sites.json answer 503 to GitHub's servers but serve a home
+  connection. GitHub's run skips them; `scripts/local_scan.sh` scans only them from the owner's
+  computer (hourly through launchd, from its own clone in `~/.listings-radar/repo`) and saves to
+  the same `data` branch. Each side merges the other's agencies in before saving
+  (`scripts/merge_data.py`), so neither overwrites the other
 - `scraper/mailalerts.py` – agencies behind bot protection list on Spitogatos and xe.gr, which email
   new matches for a saved search. With `ALERT_EMAIL` and `ALERT_EMAIL_APP_PASSWORD` (a Gmail app
   password) as secrets, each run reads those emails (read-only) and sends each listing in them to

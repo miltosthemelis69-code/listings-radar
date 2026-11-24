@@ -119,21 +119,24 @@
     "id": "georgiou",
     "name": "Γεωργίου Μεσιτικό",
     "adapter": "houzez",
-    "base_url": "https://mesitikogeorgiou.gr"
+    "base_url": "https://mesitikogeorgiou.gr",
+    "local": true
   },
   {
     "id": "domus",
     "name": "Domus Estate",
     "adapter": "estateplus",
     "base_url": "https://domus-estate.gr",
-    "deal": "sale"
+    "deal": "sale",
+    "local": true
   },
   {
     "id": "tsimogiannis",
     "name": "Τσιμογιάννης Δυναμική",
     "adapter": "estateplus",
     "base_url": "https://foititikaspitia.eu",
-    "deal": "sale"
+    "deal": "sale",
+    "local": true
   },
   {
     "id": "housecity",
@@ -152,7 +155,8 @@
     "name": "Lysis Mesitiki",
     "adapter": "estateplus",
     "base_url": "https://lysismesitiki.gr",
-    "deal": "sale"
+    "deal": "sale",
+    "local": true
   },
   {
     "id": "remax-direct",
@@ -219,7 +223,8 @@
     "adapter": "estateplus",
     "base_url": "https://barron.gr",
     "region": "Θεσσαλονίκη",
-    "deal": "sale"
+    "deal": "sale",
+    "local": true
   },
   {
     "id": "thess-boxmesitiko",
@@ -227,7 +232,8 @@
     "adapter": "estateplus",
     "base_url": "https://boxmesitiko.gr",
     "region": "Θεσσαλονίκη",
-    "deal": "sale"
+    "deal": "sale",
+    "local": true
   },
   {
     "id": "thess-doragroup",
@@ -235,7 +241,8 @@
     "adapter": "estateplus",
     "base_url": "https://doragroup.gr",
     "region": "Θεσσαλονίκη",
-    "deal": "sale"
+    "deal": "sale",
+    "local": true
   },
   {
     "id": "thess-gougleri",
@@ -257,7 +264,8 @@
     "adapter": "estateplus",
     "base_url": "https://happyhousepro.gr",
     "region": "Θεσσαλονίκη",
-    "deal": "sale"
+    "deal": "sale",
+    "local": true
   },
   {
     "id": "thess-houseland-estate",
@@ -284,7 +292,8 @@
     "adapter": "estateplus",
     "base_url": "https://oikomesitikh.gr",
     "region": "Θεσσαλονίκη",
-    "deal": "sale"
+    "deal": "sale",
+    "local": true
   },
   {
     "id": "thess-lamprakirealestate",
@@ -306,7 +315,8 @@
     "adapter": "estateplus",
     "base_url": "https://morfinos-estate.gr",
     "region": "Θεσσαλονίκη",
-    "deal": "sale"
+    "deal": "sale",
+    "local": true
   },
   {
     "id": "thess-mykatoikia4u",
@@ -335,7 +345,8 @@
     "adapter": "estateplus",
     "base_url": "https://papafi.gr",
     "region": "Θεσσαλονίκη",
-    "deal": "sale"
+    "deal": "sale",
+    "local": true
   },
   {
     "id": "thess-propertyvision",
@@ -343,7 +354,8 @@
     "adapter": "estateplus",
     "base_url": "https://propertyvision.gr",
     "region": "Θεσσαλονίκη",
-    "deal": "sale"
+    "deal": "sale",
+    "local": true
   },
   {
     "id": "thess-realpraxis",
@@ -358,7 +370,8 @@
     "adapter": "estateplus",
     "base_url": "https://sevenrealestate.gr",
     "region": "Θεσσαλονίκη",
-    "deal": "sale"
+    "deal": "sale",
+    "local": true
   },
   {
     "id": "thess-spiti365",
@@ -373,7 +386,8 @@
     "adapter": "estateplus",
     "base_url": "https://starhomerealestate.gr",
     "region": "Θεσσαλονίκη",
-    "deal": "sale"
+    "deal": "sale",
+    "local": true
   },
   {
     "id": "thess-stegiependisi",
@@ -381,7 +395,8 @@
     "adapter": "estateplus",
     "base_url": "https://stegiependisi.gr",
     "region": "Θεσσαλονίκη",
-    "deal": "sale"
+    "deal": "sale",
+    "local": true
   },
   {
     "id": "thess-thebrokers",
@@ -389,7 +404,8 @@
     "adapter": "estateplus",
     "base_url": "https://thebrokers.gr",
     "region": "Θεσσαλονίκη",
-    "deal": "sale"
+    "deal": "sale",
+    "local": true
   },
   {
     "id": "thess-tzemisproperties",
@@ -397,7 +413,8 @@
     "adapter": "estateplus",
     "base_url": "https://tzemisproperties.gr",
     "region": "Θεσσαλονίκη",
-    "deal": "sale"
+    "deal": "sale",
+    "local": true
   },
   {
     "id": "thess-vagionakirealestate",
@@ -405,7 +422,8 @@
     "adapter": "estateplus",
     "base_url": "https://vagionakirealestate.gr",
     "region": "Θεσσαλονίκη",
-    "deal": "sale"
+    "deal": "sale",
+    "local": true
   },
   {
     "id": "thess-plrealestate",
@@ -420,7 +438,8 @@
     "adapter": "estateplus",
     "base_url": "https://www.alphahome.gr",
     "region": "Θεσσαλονίκη",
-    "deal": "sale"
+    "deal": "sale",
+    "local": true
   },
   {
     "id": "thess-anastasiouproperties",
@@ -435,7 +454,8 @@
     "adapter": "estateplus",
     "base_url": "https://avenuerealestate.gr",
     "region": "Θεσσαλονίκη",
-    "deal": "sale"
+    "deal": "sale",
+    "local": true
   },
   {
     "id": "thess-alemarestate",
@@ -489,7 +509,8 @@
     "adapter": "estateplus",
     "base_url": "https://karoutasproperties.gr",
     "region": "Θεσσαλονίκη",
-    "deal": "sale"
+    "deal": "sale",
+    "local": true
   },
   {
     "id": "thess-maddrealestate",
@@ -556,7 +577,8 @@
     "adapter": "estateplus",
     "base_url": "https://specialagentsestate.gr",
     "region": "Θεσσαλονίκη",
-    "deal": "sale"
+    "deal": "sale",
+    "local": true
   },
   {
     "id": "thess-stayhomerealestate",
@@ -564,7 +586,8 @@
     "adapter": "estateplus",
     "base_url": "https://stayhomerealestate.gr",
     "region": "Θεσσαλονίκη",
-    "deal": "sale"
+    "deal": "sale",
+    "local": true
   },
   {
     "id": "thess-streetrealestate",
@@ -598,7 +621,8 @@
     "adapter": "estateplus",
     "base_url": "https://celestproperties.gr",
     "region": "Θεσσαλονίκη",
-    "deal": "sale"
+    "deal": "sale",
+    "local": true
   },
   {
     "id": "thess-villaingr",
@@ -613,7 +637,8 @@
     "adapter": "estateplus",
     "base_url": "https://visionhome.gr",
     "region": "Θεσσαλονίκη",
-    "deal": "sale"
+    "deal": "sale",
+    "local": true
   },
   {
     "id": "thess-agarealestate",
@@ -773,14 +798,16 @@
     "name": "Master House",
     "adapter": "estateplus",
     "base_url": "https://master-house.gr",
-    "region": "Θεσσαλονίκη"
+    "region": "Θεσσαλονίκη",
+    "local": true
   },
   {
     "id": "thess-timeless",
     "name": "Timeless Realty",
     "adapter": "estateplus",
     "base_url": "https://timeless-realty.gr",
-    "region": "Θεσσαλονίκη"
+    "region": "Θεσσαλονίκη",
+    "local": true
   },
   {
     "id": "thess-eliteps",
@@ -904,7 +931,8 @@
     "name": "RE/MAX Gold",
     "adapter": "remaxgold",
     "base_url": "https://remax-gold.gr",
-    "region": "Θεσσαλονίκη"
+    "region": "Θεσσαλονίκη",
+    "local": true
   },
   {
     "id": "thess-elgreko",
@@ -1197,7 +1225,8 @@
     "adapter": "estateplus_v2",
     "base_url": "https://dehome.gr",
     "deal": "sale",
-    "region": "Θεσσαλονίκη"
+    "region": "Θεσσαλονίκη",
+    "local": true
   },
   {
     "id": "thess-clock",
@@ -1205,7 +1234,8 @@
     "adapter": "estateplus_pxp",
     "base_url": "https://clockrealestate.gr",
     "deal": "sale",
-    "region": "Θεσσαλονίκη"
+    "region": "Θεσσαλονίκη",
+    "local": true
   },
   {
     "id": "thess-terrahomes",
