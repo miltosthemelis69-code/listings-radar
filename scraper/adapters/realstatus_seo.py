@@ -38,7 +38,8 @@ def parse_skoreal_card(card):
     link = card.select_one("a.prop-link")
     href = link["href"]
     source_id = re.search(r"/property/(\d+)", href).group(1)
-    title = clean(card.select_one(".card-body h2").get_text()) if card.select_one(".card-body h2") else ""
+    heading = card.select_one(".card-body h2, .card-body h3")  # skoreal moved it from h2 to h3
+    title = clean(heading.get_text()) if heading else clean(link.get("aria-label") or "")
     slug = href.rstrip("/").split("/")[-1] if not href.rstrip("/").endswith(source_id) else ""
     slug_type = SLUG_TYPES.get(normalize(slug.split("-")[0].split(" ")[0])) if slug else None
     place = card.select_one(".details-listing > span")
